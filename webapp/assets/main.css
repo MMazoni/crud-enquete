@@ -1,0 +1,248 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* ------------------------------------------CSS RESET------------------------------------------ */
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1;
+}
+
+.container {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1500px;
+}
+
+@media (max-width: 1600px) {
+  .container {
+    max-width: 1132px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .container {
+    max-width: 844px;
+  }
+}
+
+h1{
+  font-size: 2rem;
+  padding: 2rem 0;
+}
+
+.flex{
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.space-end{
+  justify-content: flex-end;
+}
+
+p{
+  margin: 0;
+}
+
+h3{
+  font-size: 0.70rem;
+}
+
+h2{
+  font-size: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+button{
+  cursor: pointer;
+}
+/*------------------------------------------ Tabela -------------------------*/
+
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+table caption{
+  padding: 0.75rem 0 1.5rem;
+  font-size: 1.4rem;
+}
+
+table th,
+table td {
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.80em;
+}
+
+table tbody tr:hover{
+  background-color: #f1f1f1;
+}
+
+table tbody tr{
+  cursor: pointer;
+}
+
+table th{
+  font-weight: bold;
+  padding: 1rem;
+  background-color: #212529;
+  border-color: #32383e;
+  color: #fff;
+}
+
+
+table span {
+  width: 100%;
+  max-width: 130px;
+  padding: 0.5rem;
+  border: 0;
+  display: inline-block;
+  text-align: center;
+}
+
+/*------------------------------------status------------------------------*/
+
+.progress {
+  color: #fff;
+  background-color: #0069d9;
+}
+
+.done {
+  color: #fff;
+  background-color: #28a745;
+}
+
+.todo {
+  color: #fff;
+  background-color: #6c757d;
+}
+
+/*-------------------------------------Question----------------------------*/
+
+.container-question{
+  margin: 2rem auto 0;
+}
+
+.container-question button{
+  width: 80%;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 0;
+  padding: 0.75rem 1rem;
+}
+
+.container-question button span {
+  border: 1px solid;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  display: inline-block;
+  margin-right: 15px;
+  font-size: 0.80rem;
+  padding-top: 3px;
+  vertical-align: middle;
+}
+
+:focus {
+  outline: -webkit-focus-ring-color auto 0px;
+}
+
+.container-question-percent{
+  width: 80%;
+  height: 20px;
+  margin: 0;
+}
+
+.container-question-percent div:first-child{
+  width: 80%;
+  background: #212529;
+  height: 100%;
+}
+
+.container-question-percent div:last-child{
+  width: 20%;
+  background:#f1f1f1;
+  height: 100%;
+}
+
+.container-question .container-question-percent,.container-question .container-question-percent + p {
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.btn-success{
+  width: 150px;
+  margin: 3rem 0;
+  color: #fff;
+  background: #28a745;
+  padding: 0.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+}

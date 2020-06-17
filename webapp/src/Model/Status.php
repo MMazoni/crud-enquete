@@ -1,7 +1,8 @@
 <?php 
 
-namespace SIGNOWEB\TestePratico;
+namespace SIGNOWEB\TestePratico\Model;
 
+use InvalidArgumentException;
 use SIGNOWEB\TestePratico\Conexao;
 
 
@@ -17,14 +18,13 @@ class Status
     public function listar_todos(): array
     {
         $resultado = $this->mysql->query('SELECT * FROM Estados');
-        $status = $resultado->fetch_all(MYSQLI_ASSOC);
-        return $status;
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function descricaoPorId(string $id): string
+    public function descricaoPorId(int $id): string
     {
         $selecionaStatus = $this->mysql->prepare('SELECT descricao FROM Estados WHERE id_status = ?');
-        $selecionaStatus->bind_param('s', $id);
+        $selecionaStatus->bind_param('i', $id);
         $selecionaStatus->execute();
         $status = $selecionaStatus->get_result()->fetch_row();
         return $status[0];
@@ -41,7 +41,7 @@ class Status
                 return 'done';
 
             default:
-                echo 'Erro: Id do status inexistente.';
+                throw new InvalidArgumentException();
                 break;
         }
     }

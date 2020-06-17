@@ -1,6 +1,6 @@
 <?php 
 
-namespace SIGNOWEB\TestePratico;
+namespace SIGNOWEB\TestePratico\Model;
 
 use SIGNOWEB\TestePratico\Conexao;
 
@@ -17,17 +17,15 @@ class Opcao
     public function listar_todos(): array
     {
         $resultado = $this->mysql->query('SELECT * FROM Opcoes');
-        $opcoes = $resultado->fetch_all(MYSQLI_ASSOC);
-        return $opcoes;
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function encontrarPorId(string $id) :array
+    public function encontrarPorIdEnquete(int $id) 
     {
-        $selecionaOpcao = $this->mysql->prepare('SELECT id_opcao, nome, id_enquete FROM Opcoes WHERE id_opcao = ?');
-        $selecionaOpcao->bind_param('s', $id);
+        $selecionaOpcao = $this->mysql->prepare('SELECT id_opcao, id_enquete, nome, qnt_votos FROM Opcoes WHERE id_enquete = ?');
+        $selecionaOpcao->bind_param('i', $id);
         $selecionaOpcao->execute();
-        $opcao = $selecionaOpcao->get_result()->fetch_assoc();
-        return $opcao;
+        return  $selecionaOpcao->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function adicionar(int $id_enquete, string $nome): void
@@ -52,17 +50,25 @@ class Opcao
         $editaOpcao->execute();
     }
 
-    public function votar(string $id_opcao, int $id_enquete): void
+    public function votar(int $id_opcao, int $id_enquete): array
     {
         $resultado = $this->mysql->prepare('SELECT qnt_votos FROM Opcoes WHERE id_opcao = ? AND id_enquete = ?');
-        $resultado->bind_param('si', $id_opcao, $id_enquete);
+        $resultado->bind_param('ii', $id_opcao, $id_enquete);
         $resultado->execute();
         $numeroVotos = $resultado->get_result()->fetch_row();
         $numeroVotos[0]++;
 
         $editaOpcao = $this->mysql->prepare('UPDATE Opcoes SET qnt_votos = ? WHERE id_opcao = ? AND id_enquete = ?');
-        $editaOpcao->bind_param('isi', $numeroVotos[0], $id_opcao, $id_enquete);
+        $editaOpcao->bind_param('iii', $numeroVotos[0], $id_opcao, $id_enquete);
         $editaOpcao->execute();
+
+        
+        return $this->encontrarPorIdEnquete($id_enquete);
+    }
+
+    public function porcentagemVotos()
+    {
+        
     }
     
 }

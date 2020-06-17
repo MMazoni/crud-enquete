@@ -1,3 +1,5 @@
+--CREATE DATABASE IF NOT EXISTS `enquete` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 use enquete;
 
 create table if not exists Enquetes (
@@ -55,6 +57,12 @@ insert into Enquetes(titulo, dt_inicio, dt_termino, id_status)
 insert into Enquetes(titulo, dt_inicio, dt_termino, id_status)
 	values ('Qual é o melhor vilão da Marvel?', '2020-06-16', '2020-06-18', 2);
 
+insert into Enquetes(titulo, dt_inicio, dt_termino, id_status)
+	values ('Qual é a melhor matéria?', '2020-06-20', '2020-06-21', 3);
+
+insert into Enquetes(titulo, dt_inicio, dt_termino, id_status)
+	values ('Qual é a melhor planeta?', '2020-06-10', '2020-06-21', 3);
+
 insert into Opcoes(id_enquete, nome, qnt_votos)
 	values (1, 'Vitamina C', 4);
 
@@ -76,3 +84,20 @@ insert into Opcoes(id_enquete, nome, qnt_votos)
 insert into Opcoes(id_enquete, nome, qnt_votos)
 	values (2, 'Galactus', 18);
 
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (3, 'Matemática', 10);
+
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (3, 'Geografia', 1);
+
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (3, 'Português', 13);
+
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (3, 'Biologia', 5);
+
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (3, 'Química', 20);
+
+insert into Opcoes(id_enquete, nome, qnt_votos)
+	values (4, 'Plutão', 1);

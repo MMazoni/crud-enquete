@@ -2,8 +2,8 @@
 
 namespace SIGNOWEB\TestePratico\Controller;
 
-use SIGNOWEB\TestePratico\Enquete;
-use SIGNOWEB\TestePratico\Status;
+use SIGNOWEB\TestePratico\Model\Enquete;
+use SIGNOWEB\TestePratico\Model\Status;
 
 
 class ListaEnquete implements InterfaceControladorRequisicao

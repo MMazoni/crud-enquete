@@ -1,6 +1,8 @@
 <?php 
 
-namespace SIGNOWEB\TestePratico;
+namespace SIGNOWEB\TestePratico\Model;
+
+use SIGNOWEB\TestePratico\Conexao;
 
 class Enquete
 {
@@ -11,20 +13,39 @@ class Enquete
         $this->mysql = Conexao::conectar_banco();
     }
 
+    public function validarData()
+    {
+        setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+        date_default_timezone_set('America/Sao_Paulo');
+        $id_status = 3;
+        $editaEnquete = $this->mysql->prepare('UPDATE Enquetes SET  id_status = ? WHERE dt_termino < ?');
+        $editaEnquete->bind_param('is', $id_status, date('Y-m-d H:i'));
+        $editaEnquete->execute();
+
+        $id_status = 1;
+        $editaEnquete = $this->mysql->prepare('UPDATE Enquetes SET  id_status = ? WHERE dt_inicio > ?');
+        $editaEnquete->bind_param('is', $id_status, date('Y-m-d H:i'));
+        $editaEnquete->execute();
+
+        $id_status = 2;
+        $editaEnquete = $this->mysql->prepare('UPDATE Enquetes SET  id_status = ? WHERE ? BETWEEN dt_inicio AND dt_termino');
+        $editaEnquete->bind_param('is', $id_status, date('Y-m-d H:i'));
+        $editaEnquete->execute();
+    }
     public function listar_todos(): array
     {
-        $resultado = $this->mysql->query('SELECT * FROM Enquetes');
-        $enquetes = $resultado->fetch_all(MYSQLI_ASSOC);
-        return $enquetes;
+        $this->validarData();
+        $resultado = $this->mysql->query("SELECT * from Enquetes as e WHERE 
+        (SELECT count(*) FROM Opcoes WHERE id_enquete = e.id_enquete) > 2");
+        return $resultado->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function encontrarPorId(string $id) :array
+    public function encontrarPorId(int $id) :array
     {
         $selecionaEnquete = $this->mysql->prepare('SELECT * FROM Enquetes WHERE id_enquete = ?');
-        $selecionaEnquete->bind_param('s', $id);
+        $selecionaEnquete->bind_param('i', $id);
         $selecionaEnquete->execute();
-        $enquete = $selecionaEnquete->get_result()->fetch_assoc();
-        return $enquete;
+        return $selecionaEnquete->get_result()->fetch_assoc();
     } 
     
     public function adicionar(string $titulo, string $dt_inicio, 

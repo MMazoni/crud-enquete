@@ -50,7 +50,7 @@ class EnqueteParaVotacao implements InterfaceControladorRequisicao
 
     public function porcentagemVotos($qnt_votos): string
     {
-        return strval(($qnt_votos/$this->votosTotal) * 100) . '%';
+        return strval(round(($qnt_votos/$this->votosTotal) * 100, 2)) . '%';
     }
 
 }
